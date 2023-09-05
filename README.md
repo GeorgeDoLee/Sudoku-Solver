@@ -1,2 +1,2 @@
 # Sudoku-Solver
-Simple Sudoku Solver made with React and Tailwindcss
+Simple sudoku solver made with React and Tailwindcss
