@@ -82,13 +82,6 @@ function App() {
     setTable(newArray);
   };
 
-  const clear = () => {
-    setTable(
-      Array.from({ length: 9 }).map(() => Array.from({ length: 9 }).fill(""))
-    );
-    setConflictingCell({ row: -1, col: -1 });
-  };
-
   return (
     <div className="w-screen h-screen bg-slate-800 flex justify-center items-center">
       <div className="flex flex-col justify-center items-center gap-8">
@@ -120,7 +113,7 @@ function App() {
         <Buttons
           table={table}
           setTable={setTable}
-          clear={clear}
+          setConflictingCell={setConflictingCell}
           solveSudoku={solveSudoku}
         />
       </div>

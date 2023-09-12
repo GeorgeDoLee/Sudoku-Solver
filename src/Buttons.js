@@ -1,7 +1,7 @@
 import React from "react";
 import useFetch from "./hooks/useFetch";
 
-const Buttons = ({ table, setTable, clear, solveSudoku }) => {
+const Buttons = ({ table, setTable, setConflictingCell, solveSudoku }) => {
   const randomSudokus = useFetch("http://localhost:8000/puzzles");
 
   const generateRandom = () => {
@@ -21,6 +21,13 @@ const Buttons = ({ table, setTable, clear, solveSudoku }) => {
     } else {
       alert("unsolvable");
     }
+  };
+
+  const clear = () => {
+    setTable(
+      Array.from({ length: 9 }).map(() => Array.from({ length: 9 }).fill(""))
+    );
+    setConflictingCell({ row: -1, col: -1 });
   };
 
   const buttonsData = [
