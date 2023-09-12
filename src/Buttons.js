@@ -1,15 +1,45 @@
-const Buttons = () => {
+import React from "react";
+import useFetch from "./hooks/useFetch";
+
+const Buttons = ({ table, setTable, clear, solveSudoku }) => {
+  const randomSudokus = useFetch("http://localhost:8000/puzzles");
+
+  const generateRandom = () => {
+    if (randomSudokus) {
+      const randomIndex = Math.floor(Math.random() * randomSudokus.length);
+      console.log(randomSudokus[1]);
+      setTable(randomSudokus[randomIndex]);
+    }
+  };
+
+  const solve = () => {
+    const solvedTable = table.map((row) => [...row]);
+    const isSolved = solveSudoku(solvedTable);
+
+    if (isSolved) {
+      setTable(solvedTable);
+    } else {
+      alert("unsolvable");
+    }
+  };
+
+  const buttonsData = [
+    { title: "Clear", function: clear },
+    { title: "Generate Random", function: generateRandom },
+    { title: "Solve", function: solve },
+  ];
+
   return (
     <div className="flex flex-row justify-center items-center gap-4">
-      <button className="p-2 bg-zinc-200 text-lg text-slate-800 rounded-md">
-        Clear
-      </button>
-      <button className="p-2 bg-zinc-200 text-lg text-slate-800 rounded-md">
-        Generate Random
-      </button>
-      <button className="p-2 bg-zinc-200 text-lg text-slate-800 rounded-md">
-        Solve
-      </button>
+      {buttonsData.map((button, index) => (
+        <button
+          key={index}
+          className="p-2 bg-zinc-200 text-lg text-slate-800 rounded-md duration-300 hover:bg-zinc-400 active:scale-95"
+          onClick={button.function}
+        >
+          {button.title}
+        </button>
+      ))}
     </div>
   );
 };
