@@ -113,8 +113,8 @@ function App() {
         <Buttons
           table={table}
           setTable={setTable}
-          setConflictingCell={setConflictingCell}
           solveSudoku={solveSudoku}
+          setConflictingCell={setConflictingCell}
         />
       </div>
     </div>
